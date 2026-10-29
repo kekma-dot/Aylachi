@@ -1,0 +1,20 @@
+{
+  "name": "@aylachi/desktop-native",
+  "version": "0.0.0-dev",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:ui": "vite build --config ../desktop-ui/vite.config.js",
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.12.3",
+    "@vitejs/plugin-react": "6.1.2",
+    "vite": "8.3.5"
+  },
+  "dependencies": {
+    "@xyflow/react": "12.3.6",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  }
+}

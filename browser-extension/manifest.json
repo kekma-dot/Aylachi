@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "Aylachi Satellite",
+  "version": "1.0.0",
+  "description": "Extracts visible text only from a tab explicitly granted by one user click.",
+  "permissions": ["activeTab", "scripting", "nativeMessaging"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_title": "Grant this tab to one Aylachi read" }
+}

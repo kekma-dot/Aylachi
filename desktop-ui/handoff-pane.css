@@ -1,0 +1,58 @@
+.handoff-pane {
+  --handoff-bg: var(--card, #fffaf3);
+  --handoff-fg: var(--fg, #575279);
+  --handoff-line: var(--line, #9893a5);
+  --handoff-muted: var(--muted, #797593);
+  --handoff-accent: var(--accent, #b4637a);
+  --handoff-danger: var(--danger, #b4637a);
+  color: var(--handoff-fg);
+  background: var(--handoff-bg);
+  border: 2px solid var(--handoff-line);
+  padding: 1rem;
+  font: 16px/1.45 system-ui, sans-serif;
+}
+.handoff-pane *, .handoff-pane *::before, .handoff-pane *::after { box-sizing: border-box; }
+.handoff-pane h1, .handoff-pane h2, .handoff-pane p { margin-top: 0; }
+.handoff-pane h1 { margin-bottom: 0; font-size: 1.4rem; }
+.handoff-pane h2 { font-size: 1rem; }
+.handoff-pane button, .handoff-pane input, .handoff-pane select { color: inherit; font: inherit; }
+.handoff-pane button, .handoff-pane input, .handoff-pane select { border: 2px solid var(--handoff-line); background: var(--handoff-bg); padding: .45rem .7rem; }
+.handoff-pane button { cursor: pointer; }
+.handoff-pane button:hover:not(:disabled) { border-color: var(--handoff-fg); }
+.handoff-pane button:disabled, .handoff-pane fieldset:disabled { cursor: not-allowed; opacity: .58; }
+.handoff-pane :focus-visible { outline: 3px solid var(--handoff-accent); outline-offset: 3px; }
+.handoff-pane-heading, .handoff-pane-section-heading, .handoff-pane-actions { display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
+.handoff-pane-heading { border-bottom: 2px solid var(--handoff-line); padding-bottom: .75rem; }
+.handoff-pane-eyebrow { margin-bottom: .2rem; color: var(--handoff-muted); font: 600 .7rem ui-monospace, monospace; letter-spacing: .05em; }
+.handoff-pane-manual, .handoff-pane-muted { color: var(--handoff-muted); }
+.handoff-pane-form { display: grid; gap: .55rem; margin: 1rem 0; }
+.handoff-pane-form fieldset { display: grid; grid-template-columns: minmax(8rem, .6fr) minmax(0, 1.4fr); align-items: center; gap: .55rem .75rem; border: 2px solid var(--handoff-line); padding: .75rem; }
+.handoff-pane-form legend { padding: 0 .35rem; font-weight: 700; }
+.handoff-pane-form input, .handoff-pane-form select { width: 100%; min-width: 0; background: var(--bg, #faf4ed); }
+.handoff-pane-primary { border-color: var(--handoff-fg) !important; font-weight: 700 !important; }
+.handoff-pane-section-heading { border-bottom: 2px solid var(--handoff-line); margin-top: 1rem; }
+.handoff-pane-section-heading h2 { margin-bottom: .5rem; }
+.handoff-pane-items { list-style: none; margin: .5rem 0; padding: 0; }
+.handoff-pane-items li { margin: .4rem 0; }
+.handoff-pane-item { width: 100%; display: grid; gap: .2rem; text-align: left; overflow-wrap: anywhere; }
+.handoff-pane-item small, .handoff-pane-item code { color: var(--handoff-muted); font: .75rem ui-monospace, monospace; }
+.handoff-pane-preview, .handoff-pane-uncertain { border-top: 2px solid var(--handoff-line); margin-top: 1rem; padding-top: .75rem; }
+.handoff-pane-preview dl { display: grid; grid-template-columns: minmax(8rem, .5fr) minmax(0, 1fr); gap: .35rem .75rem; }
+.handoff-pane-preview dt { color: var(--handoff-muted); }
+.handoff-pane-preview dd { margin: 0; overflow-wrap: anywhere; }
+.handoff-pane-label { display: block; font-weight: 700; margin: .6rem 0 .25rem; }
+.handoff-pane pre { max-height: 22rem; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; background: var(--bg, #faf4ed); border: 1px solid var(--handoff-line); padding: .75rem; font: .85rem/1.4 ui-monospace, monospace; }
+.handoff-pane-uncertain { border-left: 4px solid var(--handoff-danger); padding-left: .75rem; }
+.handoff-pane-uncertain h2, .handoff-pane-accepted { color: var(--handoff-danger); }
+.handoff-pane-message { border-left: 4px solid var(--handoff-accent); padding: .5rem .75rem; overflow-wrap: anywhere; }
+.handoff-pane-actions { justify-content: flex-start; flex-wrap: wrap; }
+@media (max-width: 640px) {
+  .handoff-pane-form fieldset { grid-template-columns: 1fr; }
+  .handoff-pane-preview dl { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .handoff-pane *, .handoff-pane *::before, .handoff-pane *::after {
+    scroll-behavior: auto !important; animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important; transition-duration: .01ms !important;
+  }
+}

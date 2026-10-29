@@ -1,0 +1,7 @@
+{
+  "name": "com.aylachi.satellite",
+  "description": "Aylachi native Satellite browser connector",
+  "path": "/absolute/path/to/aylachi/browser-extension/native-host-launcher.sh",
+  "type": "stdio",
+  "allowed_origins": ["chrome-extension://REPLACE_WITH_UNPACKED_EXTENSION_ID/"]
+}

@@ -1,0 +1,355 @@
+{
+  "format": 1,
+  "owner_decisions": {
+    "native_sessions": "Aylachi creates independent native Pi sessions",
+    "compaction": "exactly one compaction owner per session",
+    "hermes": "existing API read-only; writes only against an isolated test store",
+    "old_stores": "no migration",
+    "review": "off"
+  },
+  "components": [
+    {
+      "id": "pi-native-session-host",
+      "kind": "sdk-host",
+      "status": "PASS_SCOPED",
+      "presence": "selected package identified by parent",
+      "historical_probe": {
+        "scope": "Initial SDK session smoke probe; later scoped adapter proofs are recorded separately and do not retroactively broaden this probe.",
+        "test": "/srv/aylachi/coding-repos/aylachi/agent-host/tests/sdk-smoke.test.mjs",
+        "result": "parent reports actual absolute-path SDK import and session smoke PASS",
+        "not_verified_at_probe": ["tool execution", "MCP routing", "real provider", "extension execution", "OS isolation"]
+      },
+      "evidence": {
+        "package": "/srv/aylachi/aylachi-prototype/app/node_modules/@earendil-works/pi-coding-agent",
+        "version": "1.3.0",
+        "node": "22.23.2",
+        "test": "/srv/aylachi/coding-repos/aylachi/agent-host/tests/sdk-smoke.test.mjs",
+        "result": "parent reports actual absolute-path SDK import and native session smoke PASS",
+        "adapter_fixture": {
+          "source": "/srv/aylachi/coding-repos/aylachi/agent-host/pi-adapter.mjs",
+          "source_sha256": "25942e821714e6cfd8237a798f80ebb0ef331a288122e7868950c969d22f4849",
+          "test": "/srv/aylachi/coding-repos/aylachi/agent-host/tests/pi-adapter.test.mjs",
+          "test_sha256": "af65ae1a683fe5b02de847af1fa42b0daf6b52dcb41f080bed994c15ea6360a1",
+          "parent_log": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/adapter-mcp-lifecycle/parent-test.log",
+          "parent_log_sha256": "87d83ba2c05215cbdb8d66c58459c3177eb110bbfb6bbcbaa2081c706feb864a",
+          "result": "actual selected-SDK tool execution and synthetic provider error/cancellation paths pass; ambient skills/extensions/context remain off in the default adapter loader"
+        }
+      },
+      "verified": [
+        "controlled session setup",
+        "native persistence and reopen",
+        "independent session stores",
+        "empty active tools in the initial SDK smoke probe",
+        "actual selected-SDK tool execution through createPiAdapter with a synthetic ModelRuntime",
+        "native MCP adapter lifecycle through a separate scoped fixture record",
+        "one explicitly trusted resourceLoaderFactory skill-selection path"
+      ],
+      "not_verified": [
+        "general provider interoperability beyond the bounded live delegation record",
+        "backend-enforced output-token limits",
+        "OS isolation",
+        "broad extension/plugin parity"
+      ]
+    },
+    {
+      "id": "pi-sdk-helper-tree",
+      "kind": "other-component",
+      "status": "PRESENT_NOT_SELECTED_HOST",
+      "evidence": {"version": "0.84.3", "meaning": "package under a separate helper tree; not selected host and not a blocker"}
+    },
+    {
+      "id": "pi-hermes-memory-extension-source",
+      "kind": "existing-extension-source",
+      "status": "SOURCE_INSPECTED_HOST_COMPAT_NOT_RUN",
+      "source": "/srv/aylachi/coding-repos/Pi Hermes Memory/extension",
+      "evidence": {
+        "files": ["release/discovery.ts", "src/runtime.ts", "src/index.ts", "src/status-view.ts", "src/lifecycle.ts"],
+        "declared_sdk_gate": "0.85.1 in TrustedConfig, client identity validation, and MemoryLifecycle negotiation",
+        "package_manifest": "expected extension/package.json absent; package metadata not established",
+        "entrypoint": "imports public SDK; registers tools, commands and hooks; defers trusted config and ModelRuntime creation until startup",
+        "ui_rpc": "status-view mount and HUD/status writes are explicitly TUI-gated; RPC/headless behavior not tested; no hasUI declaration observed in inspected seam; hooks wired through api.on",
+        "hooks": ["session_start", "before_agent_start", "turn_end", "agent_settled", "session_compact", "session_shutdown", "session_tree"]
+      },
+      "not_verified": ["installed or selected by Aylachi host", "actual loader compatibility", "RPC/headless UI behavior", "tool and MCP compatibility", "live API/provider behavior"]
+    },
+    {
+      "id": "skills",
+      "kind": "skill-catalog",
+      "status": "PASS_SCOPED",
+      "meaning": "Scoped proof of inert synthetic skill metadata discovery through the selected Pi SDK loader only; not skill execution or Desktop/global profile activation.",
+      "evidence": {
+        "package": "/srv/aylachi/aylachi-prototype/app/node_modules/@earendil-works/pi-coding-agent",
+        "version": "1.3.0",
+        "node": "22.23.2",
+        "test": "/srv/aylachi/coding-repos/aylachi/compatibility/skills-sdk.test.mjs",
+        "fixture": "/srv/aylachi/coding-repos/aylachi/compatibility/skills-sdk-fixture.md",
+        "source_sha256": "974e16acfa8e01039f32d0e09ee742d912332f9ddc74fce9f688694304f4948f",
+        "local_test_log": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/L06/skills-integration/skills-sdk-test.log",
+        "local_test_log_sha256": "29a40e8867958c524cd6ea6661aa6047fc0da48b7854f8473e81258e2aac6520",
+        "environment": "Actual DefaultResourceLoader in an env -i worker with temporary HOME, cwd, agentDir, XDG directories, and synthetic resources.",
+        "result": "PASS: expected synthetic project-skill metadata discovered, decoys excluded, and Markdown body not executed; no model/provider/auth calls.",
+        "parent_verification": {
+          "log": "ORCH/skills-sdk-parent-test.log",
+          "log_sha256": "0699911e164dafaf7aa80348ec89b9f3c9fd55cfabae48f6e72e98eb0136c2cc",
+          "node": "22.23.2",
+          "selected_sdk_test": "1/1",
+          "full_root_suite": "77/77",
+          "failures": 0,
+          "skips": 0
+        }
+      },
+      "verified": [
+        "actual DefaultResourceLoader from selected @earendil-works/pi-coding-agent 1.3.0",
+        "isolated synthetic project skill discovered with expected metadata and project SourceInfo",
+        "decoy skill paths excluded",
+        "skill Markdown remained inert and was not executed",
+        "safe env -i worker used temporary HOME, cwd, agentDir, XDG directories, and resources"
+      ],
+      "not_verified": [
+        "execution of skill instructions",
+        "model invocation",
+        "Desktop skill activation",
+        "global profile parity"
+      ]
+    },
+    {
+      "id": "mcp-tools-subagents-projects",
+      "kind": "integration-surfaces",
+      "status": "PARTIAL_SCOPED_CURRENT_PROOFS",
+      "historical_probe": {
+        "status": "PARTIAL_NATIVE_MCP_SCOPED_PASS",
+        "scope": "Original standalone native MCP SDK fixture probe; its NOT_RUN labels below describe that probe's scope at the time, not current component status.",
+        "evidence": {
+          "test": "/srv/aylachi/coding-repos/aylachi/compatibility/mcp-sdk.test.mjs",
+          "fixture": "/srv/aylachi/coding-repos/aylachi/compatibility/mcp-fixture-server.mjs",
+          "runtime": "selected @earendil-works/pi-coding-agent 1.3.0 and @earendil-works/pi-mcp 1.3.0 imported; Node v22.23.2",
+          "result": "native stdio initialize/tools-list/two-tools-call paths passed after awaiting asynchronous active-tool registration; one success, one isError result; AgentSessionRuntime.dispose awaited session_shutdown and fixture exit marker",
+          "isolation": "final run used injected empty loadConfig, in-memory credential store, temporary log path, openUrl/updateConfig guards, temp cwd/agentDir/session, and a sanitized environment",
+          "log": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/L06/mcp-sdk-test-rev2.log",
+          "sha256": "f335ead80269607c7cd0f0044c936c3c64f6d13822d9ad3b22d0e14fd7eb644d",
+          "historical_attempts": "Earlier attempts used the default MCP config seam; config isolation is NOT_VERIFIED for those runs. See isolation addendum."
+        },
+        "surfaces_at_original_probe": {
+          "native_mcp": "PASS_SCOPED",
+          "external_adapters": "NOT_RUN",
+          "subagents": "NOT_RUN",
+          "project_adapter": "NOT_RUN",
+          "other_tools": "NOT_RUN"
+        },
+        "meaning_at_original_probe": "This is a scoped native MCP SDK integration proof only; it does not certify external adapter, Pi subagents, Hermes, project adapter, live provider, or OS isolation."
+      },
+      "surfaces": {
+        "native_mcp": "PASS_SCOPED",
+        "pi_adapter_mcp_lifecycle": "PASS_SCOPED",
+        "pi_adapter_tool_execution": "PASS_SCOPED",
+        "provider": "PASS_BOUNDED_LIVE_SAME_PROCESS",
+        "delegate_task": "PASS_SCOPED",
+        "subagents": "PASS_SCOPED_DELEGATION_TOOL_ONLY",
+        "project_adapter": "PASS_ONE_SYNTHETIC_CANARY",
+        "external_adapters": "NOT_RUN",
+        "hermes": "SOURCE_ONLY_HOST_COMPAT_NOT_RUN",
+        "general_product_parity": "NOT_VERIFIED"
+      },
+      "limits": [
+        "delegate_task is the Aylachi coordinator/tool path; this is not Pi subagents package parity",
+        "project_adapter is one synthetic-note canary, not project registry, search, grant inheritance, or general BAZA integration",
+        "the live provider result is one bounded same-process run, not generic provider or production acceptance",
+        "external adapters and whole-product parity remain unverified"
+      ]
+    },
+    {
+      "id": "pi-adapter-opt-in-skill-selection",
+      "kind": "trusted-adapter-resource-selection",
+      "status": "PASS_SCOPED",
+      "evidence": {
+        "sdk": "@earendil-works/pi-coding-agent@1.3.0",
+        "node": "v22.23.2",
+        "adapter_source": "/srv/aylachi/coding-repos/aylachi/agent-host/pi-adapter.mjs",
+        "adapter_source_sha256": "25942e821714e6cfd8237a798f80ebb0ef331a288122e7868950c969d22f4849",
+        "test": "/srv/aylachi/coding-repos/aylachi/agent-host/tests/pi-adapter.test.mjs",
+        "test_sha256": "af65ae1a683fe5b02de847af1fa42b0daf6b52dcb41f080bed994c15ea6360a1",
+        "parent_manifest": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/adapter-mcp-lifecycle/manifest.json",
+        "parent_manifest_sha256": "b8c9e2cafe73c5a4f2ee2504dc5e28c00ac8191a8d58037563dd586fbaa827cc",
+        "parent_log": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/adapter-mcp-lifecycle/parent-test.log",
+        "parent_log_sha256": "87d83ba2c05215cbdb8d66c58459c3177eb110bbfb6bbcbaa2081c706feb864a",
+        "test_name": "trusted resource-loader factory exposes only an explicit inert SDK skill to model context",
+        "result": "parent-run actual SDK adapter fixture selects one synthetic skill with skillPaths and includeDefaults:false; decoy skills are absent; parent test group passed 7/7"
+      },
+      "verified": [
+        "only a trusted host-supplied resourceLoaderFactory chooses the custom skill source",
+        "the explicit SDK loadSkills call uses one selected path and includeDefaults:false",
+        "selected synthetic skill is exposed in actual SDK model context while project/global decoys are excluded",
+        "the default adapter loader leaves skills, extensions, prompts, themes, and context files disabled"
+      ],
+      "not_verified": [
+        "global Pi profile or Desktop skill activation",
+        "arbitrary skill execution or safety",
+        "automatic discovery from user or project paths",
+        "live provider behavior or OS isolation"
+      ]
+    },
+    {
+      "id": "pi-adapter-mcp-lifecycle",
+      "kind": "selected-sdk-adapter-mcp-fixture",
+      "status": "PASS_SCOPED",
+      "evidence": {
+        "test": "/srv/aylachi/coding-repos/aylachi/compatibility/adapter-mcp.test.mjs",
+        "test_sha256": "37fbddfa426ebf3695919b00d74e3a3a33358ac4ad2f757aa31e4d938dbdc8fb",
+        "adapter_source": "/srv/aylachi/coding-repos/aylachi/agent-host/pi-adapter.mjs",
+        "adapter_source_sha256": "25942e821714e6cfd8237a798f80ebb0ef331a288122e7868950c969d22f4849",
+        "sdk": "@earendil-works/pi-coding-agent@1.3.0",
+        "mcp": "@earendil-works/pi-mcp@1.3.0",
+        "node": "v22.23.2",
+        "parent_manifest": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/adapter-mcp-lifecycle/manifest.json",
+        "parent_manifest_sha256": "b8c9e2cafe73c5a4f2ee2504dc5e28c00ac8191a8d58037563dd586fbaa827cc",
+        "parent_log": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/adapter-mcp-lifecycle/parent-test.log",
+        "parent_log_sha256": "87d83ba2c05215cbdb8d66c58459c3177eb110bbfb6bbcbaa2081c706feb864a",
+        "result": "source-stable parent run passed 7/7; actual adapter prompts routed fixture MCP success and tool-error calls through isolated session loaders; awaited shutdown observed both fixture exit markers"
+      },
+      "verified": [
+        "native MCP initialize, tools/list, tools/call success/error through createPiAdapter.prompt",
+        "separate loader/settings/stdio fixture process per session",
+        "injected empty MCP config, in-memory OAuth store, temporary logs, guarded openUrl/updateConfig",
+        "no fixture auth browser or MCP configuration write"
+      ],
+      "not_verified": [
+        "external adapter compatibility",
+        "real provider behavior",
+        "production credentials or ambient user configuration integration",
+        "OS isolation or whole-product MCP parity"
+      ]
+    },
+    {
+      "id": "delegate-task-sdk-hub-sqlite",
+      "kind": "actual-sdk-development-integration",
+      "status": "PASS_SCOPED",
+      "evidence": {
+        "source_manifest": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/delegation-next/tool/source-manifest.json",
+        "source_manifest_sha256": "b0fbfeafc956232df0474673e67cc61302fdc5695baa9efee8edf304bde26b1d",
+        "parent_test_log": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/delegation-next/tool/parent.log",
+        "parent_test_log_sha256": "f86763eac05d3cb7dab221045cb2b6c7950ae9db1387dc19b7c5ab2261d349fd",
+        "focused_tool_log": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/delegation-next/tool/named-tool-parent.log",
+        "focused_tool_log_sha256": "97e3a7e62741938c8396cdd899ecf112f76b585007622f6203b2b00dc64ecc06",
+        "integration_test": "/srv/aylachi/coding-repos/aylachi/integration/delegation-sdk.test.mjs",
+        "integration_test_sha256": "0e8d4a07045fc4dadc2a8629b8e538a5f6abb16aa416f2fafd88aa5c59684e75",
+        "tool_source": "/srv/aylachi/coding-repos/aylachi/delegation/tool.mjs",
+        "tool_source_sha256": "764acd3db565787867a717dd7667a8849bd35f34270dd77bbad69d1a2b84d0e6",
+        "tool_test": "/srv/aylachi/coding-repos/aylachi/delegation/tool.test.mjs",
+        "tool_test_sha256": "a15de8a4e92953f35ec53d2099525db5fe766e6dc7b791eafe90f30af36d780f",
+        "coordinator_source_sha256": "44b8b6537f656b6371339430b96d0b5e7d3aa55ad7f4ed9d40dcb1bb7cae2356",
+        "store_source_sha256": "081f5db9ec6a81f2a446ee81ff14e74bff91d501c47664f61d4c6248f0108d3d",
+        "sdk": "@earendil-works/pi-coding-agent@1.3.0",
+        "sdk_fixture": "/srv/aylachi/coding-repos/aylachi/agent-host/tests/fixture-runtime.mjs",
+        "sdk_fixture_sha256": "c54ea2331b8f12ea2758881d45caf1038a2971b76d01202e884736f86e8eb404",
+        "result": "33/33 development tests passed, including actual SDK parent/child sessions, delegate_task, loopback HTTP Hub, SQLite stores, idempotency, lost-receipt reconciliation, and no-replay recovery; tests use a synthetic ModelRuntime and fixture authorization"
+      },
+      "not_verified": [
+        "production grants, approvals, budget/model enforcement, or sandbox isolation",
+        "backend output-token enforcement",
+        "separate Agent Host/native UI integration",
+        "general live-provider behavior"
+      ]
+    },
+    {
+      "id": "delegate-task-bounded-live-run",
+      "kind": "same-process-live-provider-run",
+      "status": "PASS_BOUNDED_LIVE_SAME_PROCESS",
+      "evidence": {
+        "process_log": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/live-delegation-01/process.log",
+        "process_log_sha256": "92aae0fded35c75a05eab26ec7bff7c4491b05dc8ccc8f483f794c90e377d050",
+        "parent_process_receipt": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/live-delegation-01/parent-process-receipt.json",
+        "parent_process_receipt_sha256": "2b6af26495857a076a5d95af1f28a7fc9c98443d7adb8c2e46ecb6b461a289e7",
+        "runtime_receipt": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/live-delegation-01/runtime-receipt.json",
+        "runtime_receipt_sha256": "f7f913746cd16827a6a9b585f16531bce40f645bf6bed8a6d3da9c229d6af601",
+        "independent_verification": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/live-delegation-01/independent-verification.json",
+        "independent_verification_sha256": "c4a965e486749a31467f09cfe4a1b706e3d78aa2d71e9b6a45b0f040df44c098",
+        "history_verification": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/live-delegation-01/history-verification.json",
+        "history_verification_sha256": "84112ac95c879f631f5d0ca0530d0c046c12355cfadb53864cc663d8689f374b",
+        "live_run_attempts": 1,
+        "provider": "openai-codex",
+        "model": "gpt-6-luna",
+        "reasoning": "low",
+        "sdk_stream_calls": 4,
+        "child_tool_calls": 1,
+        "parent_tool_result_observed": true,
+        "later_public_sdk_history_reopen": "verified independently with zero new model calls",
+        "initial_runtime_receipt_history_status": "UNVERIFIED_NOT_ATTEMPTED",
+        "requested_max_tokens": 512,
+        "backend_output_limit_verified": false,
+        "cleanup": "COMPLETE"
+      },
+      "verified": [
+        "one bounded same-process live parent/child delegation run completed through SDK, Hub, and SQLite",
+        "parent observed the child tool result; retry of completed parent did not replay child work",
+        "independent later verification checked public SDK histories and SQLite integrity without additional model calls",
+        "parent/child adapters, Hub, and databases were closed"
+      ],
+      "not_verified": [
+        "backend enforcement of the requested output-token cap",
+        "separate process/host or native UI/OS sandbox acceptance",
+        "repeatability or general provider compatibility beyond this single run"
+      ]
+    },
+    {
+      "id": "project-context-fixed-helper-canary",
+      "kind": "one-synthetic-baza-canary",
+      "status": "PASS_ONE_SYNTHETIC_CANARY",
+      "evidence": {
+        "approved_canary": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/baza-canary/approved-canary.json",
+        "approved_canary_sha256": "5d8d44f247bbb9f2c08b866ec3f3741c6f10bae783601b6bffa1f90d207c2285",
+        "note_path": "10 Проекты/More then just Pi/implementation/fixtures/Aylachi BAZA bridge canary 20261021-9f4d1b78e036.md",
+        "synthetic_marker": "AYLACHI_BAZA_CANARY_9F4D1B78E036",
+        "content_sha256": "9cb7f68110d2fa27eaf082e149d40461880870d9ab7f177175341759fdf33da1",
+        "source_manifest": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/baza-canary/source-manifest.json",
+        "source_manifest_sha256": "9613694fac3285965cfa315fd1d6796607951bd70eec241400e38f7f41fa049c",
+        "reader_source_sha256": "78dc7febc741962b62416c065a3b8b6b7868afdc979a369a1333236738d3feee",
+        "fixed_helper_path": "/home/ayla/.pi/agent/scripts/ayla_pi_baza.py",
+        "fixed_helper_operation": "read",
+        "project_context_source_sha256": "d00cd33d84f26e91ec2a3dc4afed2766d9979b596443c8c31c15635b6c15f2ae",
+        "adapter_source_sha256": "25942e821714e6cfd8237a798f80ebb0ef331a288122e7868950c969d22f4849",
+        "sdk_fixture_source": "/srv/aylachi/coding-repos/aylachi/agent-host/tests/fixture-runtime.mjs",
+        "sdk_fixture_source_sha256": "c54ea2331b8f12ea2758881d45caf1038a2971b76d01202e884736f86e8eb404",
+        "composition_test": "/srv/aylachi/coding-repos/aylachi/integration/project-context-sdk.test.mjs",
+        "composition_test_sha256": "2447996ed5df76a6486608b211f1c88590779b78d248461a18e55b8de4d8dd61",
+        "composition_parent_log": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/project-reader-composition/parent.tap",
+        "composition_parent_log_sha256": "7b5cef90272afa04461db6f5bfc2516db3bd77db64e6d0e11566a081a7790792",
+        "canary_run_source": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/baza-canary/run.mjs",
+        "canary_run_source_sha256": "6527eae2664bf891ce6b58216ce9d3d6f45e9e2ea57bc7e4f32011e43258469c",
+        "parent_stdout": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/baza-canary/parent-run.stdout",
+        "parent_stdout_sha256": "fde7a136755b265b3e43a4766cd1d68cc593651b8644678164492530be634350",
+        "parent_exit": 0,
+        "parent_history_verification": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/baza-canary/parent-history-verification.json",
+        "parent_history_verification_sha256": "96bba091aff5648ba907ae071b99e80d63fdc2a891724c8035780f6634348bc8",
+        "history_reopen_did_not_repeat_helper": true,
+        "archive_receipt": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/baza-canary/archive-receipt.json",
+        "archive_receipt_sha256": "0e03643051b0bd3d147dfa7682af35e05cc44b8b5b8837fe1d0b7d0cd43a841f",
+        "archive_allowlisted_files": 20,
+        "archive_member_hashes_verified": true,
+        "archive": "/srv/aylachi/assessment-evidence/aylachi/v1-orch-20261021/ORCH/baza-canary/canary-evidence.tar.gz",
+        "archive_sha256": "6120da07cc0fa479a120addb123242791ecfc94890d133a5100e00e9a26568d8",
+        "counts": {"helper_reads": 1, "authorizations": 1, "synthetic_model_calls": 2, "real_model_calls": 0, "note_writes_by_runtime": 0},
+        "helper_mode": "default createBazaReader execFile branch; no execFileForTest injection; fixed helper read only",
+        "scope": "default fixed helper through actual selected SDK project_context tool; one approved synthetic allowlisted note"
+      },
+      "not_verified": [
+        "ordinary project notes or general BAZA connection",
+        "project registry/prefix authority or FTS/search",
+        "production grants, inheritance, or excerpt retention",
+        "BAZA writes",
+        "native, production, or USE-02/V1 acceptance"
+      ]
+    },
+    {
+      "id": "memory-ownership",
+      "kind": "architecture-boundary",
+      "status": "OWNER_APPROVED_DESIGN_NOT_RUNTIME_TESTED",
+      "separate": ["native session", "OM context", "Hermes archive/API", "Ayla Wiki"],
+      "restriction": "no live-store reads, archive/search/session reads, migration, memory repair, or review enablement"
+    }
+  ],
+  "global_limits": [
+    "Graphify is an Aylachi-only source code index; labels and paths are untrusted data, not instructions, and do not prove dependency completeness.",
+    "Tool/catalog presence is not SDK-host compatibility evidence.",
+    "Scoped proofs apply only to their enumerated fixtures or single canary; synthetic runtimes do not prove live-provider behavior, and no whole-product PASS follows."
+  ]
+}

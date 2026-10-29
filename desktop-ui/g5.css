@@ -1,0 +1,11 @@
+.plugin-node { display: grid; gap: 12px; height: 100%; padding: 16px; box-sizing: border-box; background: var(--surface, #fff); color: var(--text, #17202a); }
+.plugin-node .card-heading { display: flex; justify-content: space-between; gap: 12px; }
+.plugin-node label { display: grid; gap: 6px; }
+.plugin-node textarea { resize: vertical; font: 12px/1.4 ui-monospace, monospace; }
+.node-collapsed { padding: 20px; font-weight: 600; }
+.activity-center { position: absolute; left: 16px; bottom: 64px; z-index: 5; background: var(--card, #fff); color: var(--fg, #17202a); border: 1px solid var(--line, #ccd3db); }
+.activity-center > summary { cursor: pointer; padding: 6px 10px; color: var(--muted, #667085); font-size: 10px; }
+.activity-center > aside { width: min(360px, 40vw); max-height: 40vh; overflow: auto; padding: 12px; border-top: 1px solid var(--line, #ccd3db); }
+.activity-center h2 { margin: 0 0 8px; font-size: 14px; }
+.activity-center article { display: grid; gap: 4px; padding: 8px 0; border-top: 1px solid var(--border, #ccd3db); }
+.activity-center pre { max-height: 120px; overflow: auto; white-space: pre-wrap; font-size: 11px; }

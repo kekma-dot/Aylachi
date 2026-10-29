@@ -1,0 +1,27 @@
+node_modules
+__pycache__/
+*.py[cod]
+dist/
+target/
+.DS_Store
+.env
+.env.*
+!.env.example
+auth.json
+*.sqlite
+*.sqlite-*
+data/
+sessions/
+
+# Public-snapshot hygiene
+*.log
+*.db
+*.db-*
+*.pem
+*.key
+.venv/
+coverage/
+test-results/
+playwright-report/
+.server-*
+state/

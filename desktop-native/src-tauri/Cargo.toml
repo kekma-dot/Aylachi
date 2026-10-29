@@ -1,0 +1,11 @@
+[package]
+name = "aylachi-desktop"
+version = "0.0.0"
+edition = "2021"
+build = "build.rs"
+
+[build-dependencies]
+tauri-build = { version = "=2.7.3", features = [] }
+
+[dependencies]
+tauri = { version = "=2.12.4", default-features = false, features = ["wry"] }

@@ -1,0 +1,9 @@
+{
+  "module": "hub/authorization.mjs",
+  "api": "authorize(authenticatedContext, request, trustedResolvedDescriptor, nowMs=Date.now()) -> {allowed, principalId?, requestId?, reason?}",
+  "context": {"principalId":"server-authenticated opaque ID","expiresAt":"epoch milliseconds","revoked":"must be false","grants":[{"effect":"allow|deny","permission":"read|write","operation":"generic key","projectId?":"opaque ref","cardId?":"opaque ref","sessionId?":"opaque ref"}],"delegated?":"true requires parentGrants; child allow scope must fit a parent allow and overlap no parent deny"},
+  "request": {"operation":"generic key","requestId":"opaque ID","optional effect and refs are assertions only; contradictory values deny"},
+  "descriptor": {"operation":"resolved by trusted server registry","effect":"trusted read|write resolution","resource refs":"resolved server-side; authoritative, never copied blindly from client"},
+  "semantics": ["deny takes precedence","resource-limited grants match only the resolved target","payload principal/grants do not affect identity or permissions","invalid, unknown, expired, revoked and contradictory inputs fail closed"],
+  "limits": ["synthetic unit proof only; does not authenticate connections, persist revocation/deduplication, or certify OS isolation","stdlib only; no server bind or network auth claim","L08/parent review required before integration"]
+}
